@@ -1,0 +1,35 @@
+## roles/ansible-role-urxvt/tasks/main.yml
+# vim:ft=yaml.ansible:
+---
+- name: "Install urxvt"
+  dnf:
+    name: rxvt-unicode-256color-ml
+    state: present
+
+- name: "Ensure plugin dir's existence"
+  file:
+    path: '{{ item.value }}{{ item.key }}/.urxvt/ext/'
+    state: directory
+    mode: 0750
+    owner: '{{ item.key }}'
+    group: '{{ item.key }}'
+  with_dict: '{{ userlist }}'
+
+- name: "Copy urxvt plugin (font-size)"
+  copy:
+    src: 'font-size'
+    dest: '{{ item.value }}{{ item.key }}/.urxvt/ext/'
+    mode: 0440
+    owner: '{{ item.key }}'
+    group: '{{ item.key }}'
+  with_dict: '{{ userlist }}'
+  
+- name: "Copy urxvt plugin (vtwheel)"
+  copy:
+    src: 'vtwheel'
+    dest: '{{ item.value }}{{ item.key }}/.urxvt/ext/'
+    mode: 0440
+    owner: '{{ item.key }}'
+    group: '{{ item.key }}'
+  with_dict: '{{ userlist }}'
+...

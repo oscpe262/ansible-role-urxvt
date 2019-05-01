@@ -1,0 +1,7 @@
+## roles/ansible-role-urxvt/defaults/main.yml
+# vim:ft=yaml.ansible:
+---
+urxvt_plugins:
+  - 'vtwheel'
+  - 'font-size'
+...
